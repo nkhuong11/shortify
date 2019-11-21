@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ShortenedUrlSchema = new Schema({
-    uniqueCode: {
+    uniqueId: {
         type: String,
         required: true,
     },
@@ -17,9 +17,14 @@ const ShortenedUrlSchema = new Schema({
         default: 0
     },
 
+    isPrivate: {
+        type: Boolean,
+        default: false 
+    },
+
     owner: {
         type: Schema.Types.ObjectId,
-        required: true,
+        default: null,
         ref: 'User'
     },
 
@@ -29,5 +34,5 @@ const ShortenedUrlSchema = new Schema({
     }
 });
 
-const User = mongoose.model('ShortenedUrl', ShortenedUrlSchema)
+const ShortenedUrl = mongoose.model('ShortenedUrl', ShortenedUrlSchema)
 module.exports = ShortenedUrl;

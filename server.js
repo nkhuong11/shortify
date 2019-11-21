@@ -6,7 +6,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
-authenticateRoutes = require('./routes/authenticate');
+const authenticateRoutes = require('./routes/authenticate');
+const servicesRoutes = require('./routes/servicesRoutes');
 
 mongoose.connect(keys.mongoURI, { 
     useCreateIndex: true,
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.use('/api/user', authenticateRoutes)
+app.use('/api/services/', servicesRoutes)
 
 const PORT = process.env.PORT || 5000
 
