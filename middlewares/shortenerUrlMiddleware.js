@@ -13,8 +13,6 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         owner_id = jwt.verify(jwtToken, keys.JWT_SECRET)._id; //decode
     } 
 
-
-
     let {originUrl, uniqId} = req.body;
     if (uniqId === "") {
         do {

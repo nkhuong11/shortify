@@ -9,7 +9,7 @@ const keys = require('./config/keys');
 
 const authenticateRoutes = require('./routes/authenticate');
 const servicesRoutes = require('./routes/servicesRoutes');
-const authorizeMiddleware = require('./middlewares/authorizeMiddleware');
+const redirectMiddleware = require('./middlewares/redirectMiddleware');
 
 mongoose.connect(keys.mongoURI, { 
     useCreateIndex: true,
@@ -40,10 +40,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 
-const printHeader = (req, res) => {
-  console.log(req.headers);
-}
-
+app.use('/', redirectMiddleware);
 app.use('/api/user', authenticateRoutes);
 app.use('/api/services/', servicesRoutes);
 
