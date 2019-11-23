@@ -4,46 +4,6 @@ const keys = require('../config/keys');
 
 const User = require('../models/User');
 
-// module.exports = function loginMiddleware(req, res) {
-//     User.findOne({email: req.body.email})
-//         .exec()
-//         .then(user => {
-//             if(!user) {
-//                 return res.status(404).json({email: 'User not found'});
-//             } else {
-//                 bcrypt.compare(req.body.password, user.password)
-//                         .then(isMatch => {
-//                             if(isMatch) {
-//                                 const payload = {
-//                                     _id: user.id,
-//                                     username: user.username,
-//                                     email: user.email,
-//                                     avatar: user.avatar,
-//                                     shortenedUrls: user.shortenedUrls,
-//                                     createdDate: user.createdDate
-//                                 }
-
-//                                 jwt.sign(payload, keys.JWT_SECRET, {
-//                                     expiresIn: '7d'
-//                                 }, (err, token) => {
-//                                     if(err) console.error('There is some error in token', err);
-//                                     else {
-//                                         res.json({
-//                                             success: true,
-//                                             token: `Bearer ${token}`
-//                                         });
-//                                     }
-//                                 });
-//                             }
-//                             else {
-//                                 errors.password = 'Incorrect Password';
-//                                 return res.status(400).json(errors);
-//                             }
-//                         });
-//                     }
-//         });
-// }
-
 
 module.exports = async function loginMiddleware(req, res) {
     user = await User.findOne({email: req.body.email})
@@ -64,20 +24,20 @@ module.exports = async function loginMiddleware(req, res) {
                     }
 
                     jwt.sign(payload, keys.JWT_SECRET, {
-                        expiresIn: '7d'
+                        expiresIn: 604800 // 7days
                     }, (err, token) => {
                         if(err) console.error('There is some error in token', err);
                         else {
-                            res.json({
-                                success: true,
+                            res.cookie('jwt',token, { maxAge: 604800000, httpOnly: true}); //Set jwt in cookie
+                            res.status(200).json({
                                 token: `Bearer ${token}`
                             });
                         }
                     });
                 }
                 else {
-                    errors.password = 'Incorrect Password';
-                    return res.status(400).json(errors);
+                    errors.password = 'Authentication failed. Wrong password';
+                    return res.status(401).json(errors);
                 }
             });
         }

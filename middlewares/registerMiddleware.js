@@ -27,7 +27,7 @@ module.exports = async function registerMiddleware(req, res) {
                         
                         newUser.save()
                             .then(user => {
-                                res.json(user)
+                                res.status(200).json(user)
                             }); 
                     }
                 });
