@@ -1,0 +1,32 @@
+.my-custom-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    top: 0;
+    width: 100%;
+    padding: 1em 0;
+    background-color: #fafafa;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+    transition: height .2s ease-in-out;
+    z-index: 1;
+}
+
+.my-custom-navbar ul {
+    margin: 0px;
+}
+
+.navbar-logo {
+    padding: 0px 5em;
+}
+
+.navbar-right-item-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0px 1em;
+}
+
+
+.navbar-right-item {
+    margin-left: 1em;
+}

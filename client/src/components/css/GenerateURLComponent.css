@@ -1,0 +1,51 @@
+
+.url-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
+.url-input-container input{
+    height: 2.5em;
+}
+
+.url-input {
+    width: 75%;
+}
+
+.uniqid-input {
+    width: 25%;
+}
+
+.generate-buton-container {
+    margin: 0em 1.5em 0em;
+}
+
+.generate-buton{
+    background-color: #caeaca;
+    cursor: pointer;
+    width: 100%;
+}
+
+.generate-buton:hover {
+    background-color: #fafafa;
+}
+
+.url-result-container {
+    margin-top: 1.2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.shortened-url {
+    height: 2.3em;
+    width: 60%;
+    border: 1px solid #000;
+    font-weight: 500;
+}
+
+.copy-url-button {
+    width: 10%;
+}

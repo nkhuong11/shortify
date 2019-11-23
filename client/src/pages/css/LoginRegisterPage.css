@@ -1,0 +1,21 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    color: #262626;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 3% auto;
+    width: 100%;
+}
+
+.form-group {
+    margin: 30px;
+}
+
+.login-btn {
+    background: #fff;
+    border: none;
+    border-radius: 2px;
+    color: #696a86;
+}
