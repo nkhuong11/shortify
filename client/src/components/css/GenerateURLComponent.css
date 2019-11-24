@@ -43,7 +43,11 @@
     height: 2.3em;
     width: 60%;
     border: 1px solid #000;
-    font-weight: 500;
+    font-weight: 600;
+    resize: none;
+    background-color: #eaeaea;
+    justify-content: center;
+    text-align: center;
 }
 
 .copy-url-button {

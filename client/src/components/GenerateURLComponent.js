@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 
 import "./css/GenerateURLComponent.css";
@@ -8,6 +8,8 @@ export default function GenerateURLComponent(props) {
     const [uniqId, setUniqId] = useState("");
     const [showResult, setShowResult] = useState(false);
     const [shortedUrl, setShortedUrl] = useState("");
+    const [isCopy, setCopy] = useState(false)
+    const urlResultRef = useRef(null);
 
     
     function handleSubmit(e) {
@@ -27,7 +29,7 @@ export default function GenerateURLComponent(props) {
                     
                 } else if (res.status === 200) {
                     console.log(res.data)
-                    setShortedUrl(res.data.shortedUrl);
+                    setShortedUrl(res.data.url);
                     setShowResult(true);
                 }
                 
@@ -37,10 +39,18 @@ export default function GenerateURLComponent(props) {
 
     }
 
+    function copyToClipboard(e) {
+        urlResultRef.current.select()
+        document.execCommand('copy');
+       
+        e.target.focus();
+        setCopy(true);
+    };
+
     const renderResult = (
         <div className="horizontal-container url-result-container">
-            <div className="shortened-url">{shortedUrl}</div>
-            <button className="copy-url-button">Copy URL</button>
+            <textarea className="shortened-url" ref={urlResultRef} value={shortedUrl} readOnly/>
+            <button className="copy-url-button" onClick={copyToClipboard}>Copy URL</button>
         </div>
     );
 

@@ -32,16 +32,19 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         }
     }
 
-    const newUrl = new ShortenedUrl({
-        uniqueId: uniqId,
-        originUrl: originUrl,
-        owner: owner_id,
-        isPrivate: (owner_id) ? true : false
-    })
-
-    newUrl.save()
-        .then(url => {
-            res.status(200).json(url)
-        }); 
+    try {
+        const newUrl = await new ShortenedUrl({
+            uniqueId: uniqId,
+            originUrl: originUrl,
+            owner: owner_id,
+            isPrivate: (owner_id) ? true : false
+        }).save()
+        
+        shortedUrl = req.get('origin') + newUrl.uniqueId
+        res.status(200).json({url: shortedUrl})
+      } catch (err) {
+          console.log(err)
+        res.status(500).json({err: err})
+      }
 }
 

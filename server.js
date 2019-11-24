@@ -21,13 +21,7 @@ mongoose.connect(keys.mongoURI, {
 
 const app = express();
 
-// app.use(session({
-//   secret: 'MY SESSION SECRET',
-//   cookie: {
-//     httpOnly: true,
-//     secure: true
-//   }
-// }));
+
 app.use(cors());
 // app.use(csrf());
 // app.use((req, res, next) => {

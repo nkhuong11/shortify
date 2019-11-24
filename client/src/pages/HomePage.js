@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import GenerateURLComponent from '../components/GenerateURLComponent';
+import Tabs from '../components/Tabs';
+import UrlList from '../components/UrlList';
+
 import './css/HomePage.css'
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            urls: []
+        }
     
     }
     
@@ -16,16 +22,15 @@ export default class HomePage extends Component {
     //     }
     // }
 
-    // componentDidMount() {
-    //     axios.get(`/api/get/posts/${this.props.auth.user._id}`)
-    //     .then(res => {
-    //         console.log(res.data);
-    //         // const friend_post = res.data.posts;
-    //         this.setState({
-    //             posts: res.data.posts
-    //         });
-    //     })
-    // }
+    componentDidMount() {
+        axios.get('/api/services/get/urls')
+        .then(res => {
+            if(res.status === 200) {
+                console.log(res.data.urls)
+                this.setState({urls: res.data.urls})
+            }
+        })
+    }
     
 
     // onProfileClick() {
@@ -47,10 +52,19 @@ export default class HomePage extends Component {
     // }
 
     render() {
-
         return (
             <div className="homepage-container">
                <GenerateURLComponent/>
+               <div>
+                <Tabs>
+                    <div label="Recent URL">
+                      <UrlList urlList={this.state.urls}/>
+                    </div>
+                    <div label="Your URL">
+                        After 'while, <em>Crocodile</em>!
+                    </div>
+                </Tabs>
+               </div>
             </div>
         );
     }

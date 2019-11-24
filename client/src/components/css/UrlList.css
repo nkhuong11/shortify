@@ -1,0 +1,12 @@
+.url-list-container {
+    
+}
+
+.url-item-container {
+    height: 4rem;
+    background: #dedede;
+    border: 1px solid #000;
+    margin: 0 0 0.5rem 0;
+    justify-content: center;
+    text-align: left;
+}
