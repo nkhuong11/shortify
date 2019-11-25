@@ -12,9 +12,9 @@ const ShortenedUrlSchema = new Schema({
         required: true,
     },
 
-    clickedCount: {
-        type: Number,
-        default: 0
+    clickCounterId: {
+        type: Schema.Types.ObjectId,
+        ref: 'ClickCounter',
     },
 
     isPrivate: {
@@ -22,7 +22,7 @@ const ShortenedUrlSchema = new Schema({
         default: false 
     },
 
-    owner: {
+    ownerId: {
         type: Schema.Types.ObjectId,
         default: null,
         ref: 'User'

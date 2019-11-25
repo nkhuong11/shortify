@@ -3,14 +3,16 @@ const keys = require('../config/keys');
 
 const idGenerator = require('../services/idGenerator');
 const ShortenedUrl = require('../models/ShortenedUrl');
+const ClickCounter = require('../models/ClickCounter');
+const User = require('../models/User');
 
 
 module.exports = async function shortenerUrlMiddleware(req, res) {
      // Request header contain jwt => url create by User, else, by guess
-    let owner_id = null
-    if (req.headers['authorization']) {
-        jwtToken = req.headers['authorization'].split(' ')[1];
-        owner_id = jwt.verify(jwtToken, keys.JWT_SECRET)._id; //decode
+    let ownerId = null
+    //req.token is assign in authorizeMiddleware
+    if (req.token) {
+        ownerId = jwt.verify(req.token, keys.JWT_SECRET)._id; //decode
     } 
 
     let {originUrl, uniqId} = req.body;
@@ -36,11 +38,22 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         const newUrl = await new ShortenedUrl({
             uniqueId: uniqId,
             originUrl: originUrl,
-            owner: owner_id,
-            isPrivate: (owner_id) ? true : false
-        }).save()
+            ownerId: ownerId,
+            isPrivate: (ownerId) ? true : false
+        })
+        const clickCounter = await new ClickCounter({urlId: newUrl._id});
+        newUrl.clickCounterId = clickCounter._id;
+
+        if (ownerId) {
+            owner = await User.findById(ownerId);
+            owner.shortenedUrls.push(newUrl._id);
+            owner.save();
+        }
         
-        shortedUrl = req.get('origin') + newUrl.uniqueId
+        clickCounter.save();
+        newUrl.save();
+        
+        const shortedUrl = req.get('origin') + uniqId
         res.status(200).json({url: shortedUrl})
       } catch (err) {
           console.log(err)

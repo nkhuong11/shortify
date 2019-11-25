@@ -17,8 +17,10 @@ class Tabs extends Component {
     };
   }
 
-  onClickTabItem = (tab) => {
-    this.setState({ activeTab: tab });
+  onClickTabItem = (label, isHidden) => {
+    if (isHidden === false) {
+      this.setState({ activeTab: label });
+    }
   }
 
   render() {
@@ -36,14 +38,14 @@ class Tabs extends Component {
       <div className="tabs">
         <ol className="tab-list">
           {children.map((child) => {
-            const { label } = child.props;
-
+            const { label, isHidden } = child.props;
             return (
               <Tab
                 activeTab={activeTab}
                 key={label}
                 label={label}
-                onClick={onClickTabItem}
+                isHidden={isHidden}
+                onClick={() => onClickTabItem(label, isHidden)}
               />
             );
           })}

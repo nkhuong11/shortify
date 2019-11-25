@@ -11,7 +11,7 @@ import './css/Navbar.css';
 class Navbar extends Component {
     constructor(props) {
         super(props);
-        
+        console.log(this.props.auth);
     }
 
     onLogout(e) {
@@ -26,7 +26,7 @@ class Navbar extends Component {
                 localStorage.removeItem('_id');
                 setAuthToken(false);
                 this.props.setLoggedOut({});
-                this.props.history.push('/');
+                this.props.history.push('/login');
             })
             .catch(error => console.log(error)); 
     }
@@ -45,21 +45,30 @@ class Navbar extends Component {
         // )
 
         const authLinks = (
-            <button className="navbar-right-item" onClick={(e) => this.onLogout(e)}>
-                Logout
-            </button>
+            <ul className="navbar-right-item-wrapper">
+                <button className="navbar-right-item" onClick={(e) => this.onLogout(e)}>
+                    Logout
+                </button>
+
+                <img src={this.props.auth.user.avatar} alt={this.props.auth.user.username} title={this.props.auth.user.username}
+                    className="navbar-user-avatar"/>
+
+                 
+             </ul>
+            
         )
 
         const guestLinks = (
             <ul className="navbar-right-item-wrapper">
-                <div>
+                <div className="navbar-label">
                     <Link className="navbar-right-item" to="/register">Sign Up</Link>
                 </div>
-                <div>
+                <div className="navbar-label">
                     <Link className="navbar-right-item" to="/login">Sign In</Link>
                 </div>
             </ul>
         )
+
         return(
             <nav className="my-custom-navbar">
                 <div className="navbar-logo" onClick={this.clovaria}>

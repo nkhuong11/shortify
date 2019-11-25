@@ -27,4 +27,5 @@ border-width: 1px 1px 0 1px;
     background-color: #cecece;
     height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
 }

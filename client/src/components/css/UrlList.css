@@ -1,12 +1,28 @@
 .url-list-container {
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .url-item-container {
-    height: 4rem;
+    display: flex;
+    flex-direction: row;
     background: #dedede;
-    border: 1px solid #000;
     margin: 0 0 0.5rem 0;
-    justify-content: center;
+    padding: 1rem 4.5rem;
+    justify-content: space-between;
     text-align: left;
+    transition: transform .2s; 
 }
+
+.url-item-container:hover {
+    transform: scale(1.02);
+  }
+
+.original-url {
+    font-size: 0.9rem;
+}
+
+.shorted-url {
+    font-size: 1.1rem;
+}
+

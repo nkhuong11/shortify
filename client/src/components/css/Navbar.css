@@ -5,10 +5,8 @@
     margin-bottom: 1em;
     top: 0;
     width: 100%;
-    padding: 1em 0;
-    background-color: #fafafa;
-    border-bottom: 1px solid rgba(0,0,0,.0975);
-    transition: height .2s ease-in-out;
+    padding: 0.7rem 0;
+    background-image: linear-gradient(-90deg, #005249, #0f8a79);
     z-index: 1;
 }
 
@@ -17,16 +15,30 @@
 }
 
 .navbar-logo {
-    padding: 0px 5em;
+    color: #92c7d4;
+    font-weight: 600;
+    font-size: 2rem;
+    padding: 0px 5rem;
+    font-style: italic;
 }
 
 .navbar-right-item-wrapper {
     display: flex;
     flex-direction: row;
-    padding: 0px 1em;
+    padding: 0px 5rem;
 }
 
+.navbar-user-avatar {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    border: 2px solid #0fd945;
+}
 
 .navbar-right-item {
     margin-left: 1em;
+}
+
+.navbar-label:active {
+    color: red;
 }

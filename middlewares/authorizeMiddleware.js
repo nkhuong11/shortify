@@ -8,10 +8,7 @@ module.exports = function authorizeMiddleware(req, res, next) {
     const header_authorization = req.headers['authorization'];
 
     if(typeof header_authorization !== 'undefined') {
-        const bearer = header.split(' ');
-        const token = bearer[1];
-
-        req.token = token;
-        next();
+        req.token = header_authorization.split(' ')[1]; //'Bearer Token'
     }
+    next();
 }
