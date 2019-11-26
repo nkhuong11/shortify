@@ -3,19 +3,24 @@
     flex-direction: column;
     color: #262626;
     flex-grow: 1;
-    justify-content: center;
     align-items: center;
-    margin: 3% auto;
+    margin: 0 auto;
     width: 100%;
+    min-height: 100vh;
+    background-image: url("https://images.wallpaperscraft.com/image/tree_horizon_minimalism_128903_1920x1080.jpg");
+    overflow: hidden;
+    z-index: -5;
 }
 
 .form-group {
-    margin: 30px;
+    margin: 1.5rem;
 }
 
-.login-btn {
-    background: #fff;
-    border: none;
-    border-radius: 2px;
-    color: #696a86;
+.input-group {
+    margin-top: 5rem;
+}
+
+.auth-button {
+    margin-top: 1rem;
+    width: 15rem;
 }

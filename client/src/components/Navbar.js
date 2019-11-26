@@ -4,19 +4,25 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+import ModalWrapper from './ModalWrapper';
+
 import setAuthToken from '../services/setAuthToken';
 import {setLoggedOut} from '../actions/authentication';
+
 import './css/Navbar.css';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.auth);
+        this.state = {
+            showMenuModal: false
+        }
+        this.renderMunuModal = this.renderMunuModal.bind(this);
     }
 
     onLogout(e) {
         e.preventDefault();
-
+        this.setState({showMenuModal: false})
         axios({
             method: 'post',
             url: '/api/user/logout',
@@ -31,32 +37,36 @@ class Navbar extends Component {
             .catch(error => console.log(error)); 
     }
 
+    renderMunuModal() {
+        return (
+             <ModalWrapper onCloseRequest={() => this.setState({showMenuModal:false})}>
+                 <div className="modal-menu">
+                    <div className="modal-menu-item disable">
+                        Other Functions(Not Yet)
+                    </div>
+                    <div className="modal-menu-item" onClick={(e) => this.onLogout(e)}>
+                        Logout
+                    </div>
+                 </div>
+                
+            </ModalWrapper>
+        );
+    }
+
+
     render() {
-
-        // const authLinks = (
-        //     <ul className="navbar-right-item">
-        //         <a href="#" className="" onClick={this.onLogout.bind(this)}>
-        //             <img src={user.avatar} alt={user.username} title={user.username}
-        //                 className="navbar-user-avatar"
-        //                 style={{marginRight: '5px'}} />
-        //                     Logout
-        //         </a>
-        //     </ul>
-        // )
-
         const authLinks = (
             <ul className="navbar-right-item-wrapper">
-                <button className="navbar-right-item" onClick={(e) => this.onLogout(e)}>
-                    Logout
-                </button>
-
-                <img src={this.props.auth.user.avatar} alt={this.props.auth.user.username} title={this.props.auth.user.username}
-                    className="navbar-user-avatar"/>
-
-                 
+                <div onClick={() => {this.setState({showMenuModal: true})}} >
+                    <img className="navbar-user-avatar"
+                        src={this.props.auth.user.avatar} 
+                        alt={this.props.auth.user.username} 
+                        title={this.props.auth.user.username}/>
+                </div>
+                {this.state.showMenuModal ? this.renderMunuModal() : null}
              </ul>
-            
         )
+
 
         const guestLinks = (
             <ul className="navbar-right-item-wrapper">
@@ -71,7 +81,7 @@ class Navbar extends Component {
 
         return(
             <nav className="my-custom-navbar">
-                <div className="navbar-logo" onClick={this.clovaria}>
+                <div className="navbar-logo">
                     <Link to="/">Shortify</Link>
                 </div>
                 <div className="navbar-right-item">

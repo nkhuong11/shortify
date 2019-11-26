@@ -38,7 +38,7 @@ function LoginPage(props) {
 
     return (
         <div className="auth-container">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="input-group">
                 <div className="form-group">    
                     <input
                         type="email"
@@ -59,7 +59,7 @@ function LoginPage(props) {
                 </div>
             
                 <div className="form-group">
-                    <button type="submit" className="auth-buton">
+                    <button type="submit" className="auth-button">
                         Login
                     </button>
                 </div>

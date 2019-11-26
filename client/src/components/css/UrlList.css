@@ -8,10 +8,10 @@
     flex-direction: row;
     background: #dedede;
     margin: 0 0 0.5rem 0;
-    padding: 1rem 4.5rem;
+    padding: 1rem 3rem;
     justify-content: space-between;
     text-align: left;
-    transition: transform .2s; 
+    transition: transform .2s;
 }
 
 .url-item-container:hover {
@@ -24,5 +24,25 @@
 
 .shorted-url {
     font-size: 1.1rem;
+}
+
+.click-counter-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.click-counter-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.clicks {
+    font-weight: 500;
+    font-size: 1rem;
 }
 

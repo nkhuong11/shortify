@@ -6,6 +6,8 @@ import GenerateURLComponent from '../components/GenerateURLComponent';
 import Tabs from '../components/Tabs';
 import UrlList from '../components/UrlList';
 
+import countClicksByHours from '../services/countClicksByHours';
+
 import './css/HomePage.css'
 
 class HomePage extends Component {
@@ -15,14 +17,15 @@ class HomePage extends Component {
             recentUrls: [],
             privateUrls: []
         }
-    
+
     }
     
+
     async componentDidMount() {
-        console.log('isAuthen', this.props.auth.isAuthenticated);
-        const fetchedUrls = await axios.get('/api/services/get/urls')
+        const recentUrls = await axios.get('/api/services/get/public-urls')
         .then(res => {
             if(res.status === 200) {
+                console.log(res.data);
                 return res.data
             }
         })
@@ -30,12 +33,23 @@ class HomePage extends Component {
             console.log(err);
         })
 
-        
-        if(fetchedUrls) {
-            this.setState({
-                recentUrls: fetchedUrls.recentUrls,
-                privateUrls: fetchedUrls.privateUrls
-            });
+        if(recentUrls) {
+            this.setState({ recentUrls: recentUrls });
+        }
+
+        if (this.props.auth.isAuthenticated) {
+            const privateUrls = await axios.get('/api/services/get/private-urls')
+            .then(res => {
+                if(res.status === 200) {
+                    return res.data
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            if(privateUrls) {
+                this.setState({ privateUrls: privateUrls });
+            }
         }
     }
     
@@ -44,15 +58,15 @@ class HomePage extends Component {
         return (
             <div className="homepage-container">
                <GenerateURLComponent/>
-               <div>
-                <Tabs>
-                    <div label="Recent URL" isHidden={false}>
-                      <UrlList urlList={this.state.recentUrls} />
-                    </div>
-                    <div label="Your URL" isHidden={!this.props.auth.isAuthenticated}>
-                        <UrlList urlList={this.state.privateUrls}/>
-                    </div>
-                </Tabs>
+               <div className="tab-wrapper">
+                    <Tabs>
+                        <div label="Recent URL" isHidden={false}>
+                            <UrlList urlList={this.state.recentUrls} />
+                        </div>
+                        <div label="Your URL" isHidden={!this.props.auth.isAuthenticated}>
+                            <UrlList urlList={this.state.privateUrls}/>
+                        </div>
+                    </Tabs>
                </div>
             </div>
         );

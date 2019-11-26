@@ -8,34 +8,46 @@ export default function GenerateURLComponent(props) {
     const [uniqId, setUniqId] = useState("");
     const [showResult, setShowResult] = useState(false);
     const [shortedUrl, setShortedUrl] = useState("");
-    const [isCopy, setCopy] = useState(false)
     const urlResultRef = useRef(null);
 
+
+    function checkValidUrl(url) {
+        return url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    }
+
+    //Only Accept ASCII characters
+    function checkValidCustomId(id) {
+        return id.match(/^[\x00-\xFF]*$/);
+    }
     
     function handleSubmit(e) {
         e.preventDefault();
         
-
-        axios({
-            method: 'post',
-            url: '/api/services/shortener',
-            data: {
-                originUrl: originUrl,
-                uniqId: uniqId
-            }})
-            .then(res => {
-                if (res.status === 409) {
-                    console.log(res.data)
+        if(checkValidUrl(originUrl) && checkValidCustomId(uniqId)) {
+            axios({
+                method: 'post',
+                url: '/api/services/shortener',
+                data: {
+                    originUrl: originUrl,
+                    uniqId: uniqId
+                }})
+                .then(res => {
+                    if (res.status === 409) {
+                        console.log(res.data)
+                        
+                    } else if (res.status === 200) {
+                        console.log(res.data)
+                        setShortedUrl(res.data.url);
+                        setShowResult(true);
+                    }
                     
-                } else if (res.status === 200) {
-                    console.log(res.data)
-                    setShortedUrl(res.data.url);
-                    setShowResult(true);
-                }
                 
-               
-            })
-            .catch(error => console.log(error));
+                })
+                .catch(error => console.log(error));
+        } else {
+            alert('Invalid URL/Custom ID. Please try again');
+        }
+
 
     }
 
@@ -44,11 +56,10 @@ export default function GenerateURLComponent(props) {
         document.execCommand('copy');
        
         e.target.focus();
-        setCopy(true);
     };
 
     const renderResult = (
-        <div className="horizontal-container url-result-container">
+        <div className="url-result-container">
             <textarea className="shortened-url" ref={urlResultRef} value={shortedUrl} readOnly/>
             <button className="copy-url-button" onClick={copyToClipboard}>Copy URL</button>
         </div>
@@ -56,7 +67,7 @@ export default function GenerateURLComponent(props) {
 
     return (
         <div className="vertical-container">
-            <form className="horizontal-container" onSubmit={handleSubmit}>
+            <form className="horizontal-container generate-url-component" onSubmit={handleSubmit}>
                 <div className="url-input-container">    
                     <input
                         className="url-input"
@@ -66,7 +77,6 @@ export default function GenerateURLComponent(props) {
                         name="originUrl"
                         onChange={ e => setOriginUrl(e.target.value)}
                         value={originUrl}/>
-
                     <input
                         className="uniqid-input"
                         type="text"
@@ -76,11 +86,9 @@ export default function GenerateURLComponent(props) {
                         value={uniqId}/>
                 </div>
 
-                <div className="generate-buton-container">
-                    <button className="generate-buton" type="submit">
-                        Generate URL
-                    </button>
-                </div>
+                <button className="generate-buton" type="submit">
+                    Generate URL
+                </button>
             </form>
 
             {showResult ? renderResult : null}

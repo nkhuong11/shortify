@@ -1,32 +1,40 @@
 
+.generate-url-component {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    width: 100%;
+}
+
 .url-input-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%
+    width: 70%
 }
 
 .url-input-container input{
-    height: 2.5em;
+    height: 3rem;
+    font-size: large;
 }
 
 .url-input {
-    width: 75%;
+    width: 80%;
 }
 
 .uniqid-input {
-    width: 25%;
-}
-
-.generate-buton-container {
-    margin: 0em 1.5em 0em;
+    width: 20%;
 }
 
 .generate-buton{
     background-color: #caeaca;
     cursor: pointer;
-    width: 100%;
+    height: 3rem;
+    font-size: large;
+    width: 15%;
+    margin-left: 1rem;
+
 }
 
 .generate-buton:hover {
@@ -34,22 +42,42 @@
 }
 
 .url-result-container {
-    margin-top: 1.2em;
+    width: 70%;
+    display: flex;
+    margin: 0.5rem 5rem;
     text-align: center;
     vertical-align: middle;
+    box-shadow: 0 5px 10px rgba(59,64,69,0.1);
 }
 
 .shortened-url {
-    height: 2.3em;
-    width: 60%;
-    border: 1px solid #000;
-    font-weight: 600;
     resize: none;
+    height: 2rem;
+    width: 80%;
+    border-radius: 0.3rem;
+    font-weight: 500;
     background-color: #eaeaea;
     justify-content: center;
     text-align: center;
+    vertical-align: middle;
+    font-size: large;
+    line-height: 2rem;
+    outline: none;
+    padding: 0;
 }
 
 .copy-url-button {
-    width: 10%;
+    width: 20%;
+    height: 2rem;
+    border-radius: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.copy-url-button:hover {
+    background-color: green;
+}
+
+.copy-url-button:active {
+    background-color: red;
 }

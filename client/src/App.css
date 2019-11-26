@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 html {
@@ -7,38 +9,30 @@ html {
   background-color: #b0b0b0;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
 
 input {
-  height: 2rem;
-  width: 15rem;
-  border-radius: 2px;
-  border: 1px solid #aeaeae;
-  opacity: 0.6;
+  height: 3rem;
+  width: 25rem;
+  font-size: large;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #9e9e9e;
+  opacity: 0.5;
   color: #010101;
   padding-left: 1rem;
+  outline: none;
+}
+
+input:focus {
+  border-radius: 0.5rem;
+  border: 0.1rem solid #9cecf7;
+ 
 }
 
 button {
-  height: 2rem;
-  width: 8rem;
+  border-radius: 0.5rem;
+  border: none; 
+  height: 3rem;
+  font-size: large;
   outline: none;
 }
 
@@ -63,4 +57,20 @@ a {
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

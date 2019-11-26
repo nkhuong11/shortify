@@ -30,7 +30,7 @@ export default function RegisterPage(props) {
 
     return (
         <div className="auth-container">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="input-group">
                 <div className="form-group">
                     <input
                         type="text"
