@@ -6,49 +6,26 @@ import GenerateURLComponent from '../components/GenerateURLComponent';
 import Tabs from '../components/Tabs';
 import UrlList from '../components/UrlList';
 
-import countClicksByHours from '../services/countClicksByHours';
+import { setPrivateUrls, setPublicUrls } from '../actions/getData';
 
 import './css/HomePage.css'
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            recentUrls: [],
-            privateUrls: []
-        }
-
     }
     
 
     async componentDidMount() {
-        const recentUrls = await axios.get('/api/services/get/public-urls')
-        .then(res => {
-            if(res.status === 200) {
-                console.log(res.data);
-                return res.data
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-
-        if(recentUrls) {
-            this.setState({ recentUrls: recentUrls });
+        const recentUrlsRespone = await axios.get('/api/services/get/public-urls');
+        console.log(recentUrlsRespone);
+        if (recentUrlsRespone.status === 200) {
+            this.props.setPublicUrls(recentUrlsRespone.data);
         }
-
         if (this.props.auth.isAuthenticated) {
-            const privateUrls = await axios.get('/api/services/get/private-urls')
-            .then(res => {
-                if(res.status === 200) {
-                    return res.data
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            if(privateUrls) {
-                this.setState({ privateUrls: privateUrls });
+            const privateUrlsRespone = await axios.get('/api/services/get/private-urls');
+            if (privateUrlsRespone.status === 200) {
+                this.props.setPrivateUrls(privateUrlsRespone.data);
             }
         }
     }
@@ -61,10 +38,10 @@ class HomePage extends Component {
                <div className="tab-wrapper">
                     <Tabs>
                         <div label="Recent URL" isHidden={false}>
-                            <UrlList urlList={this.state.recentUrls} />
+                            <UrlList urlList={this.props.urlItems.publicUrls}/>
                         </div>
                         <div label="Your URL" isHidden={!this.props.auth.isAuthenticated}>
-                            <UrlList urlList={this.state.privateUrls}/>
+                            <UrlList urlList={this.props.urlItems.privateUrls}/>
                         </div>
                     </Tabs>
                </div>
@@ -75,8 +52,20 @@ class HomePage extends Component {
 
 const mapStateToProps = state => {
     return {
-      auth: state.auth
+      auth: state.auth,
+      urlItems: state.urlItems
     };
 };
 
-export default connect(mapStateToProps)(HomePage);
+const mapDispatchToProps = dispatch => {
+    return {
+        setPrivateUrls: urls => {
+            dispatch(setPrivateUrls(urls));
+        },
+        setPublicUrls: urls => {
+            dispatch(setPublicUrls(urls));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

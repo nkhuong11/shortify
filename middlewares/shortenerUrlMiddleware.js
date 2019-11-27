@@ -28,7 +28,6 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
 
         if(existUrl) {
             return res.status(409).json({
-                success: false,
                 error: 'This ID is already taken, please choose another one.'
             })
         }
@@ -52,9 +51,21 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         
         clickCounter.save();
         newUrl.save();
-        
-        const shortedUrl = req.get('origin') + uniqId
-        res.status(200).json({url: shortedUrl})
+
+        const host = req.headers.host;
+        const protocol = req.protocol;
+        const returnedUrlItem =  {
+            _id: newUrl._id,
+            uniqueId: newUrl.uniqueId,
+            originUrl: newUrl.originUrl,
+            createdDate: newUrl.createdDate,
+            shortedUrl: protocol + '://' + host + '/' + newUrl.uniqueId,
+            totalClicks: clickCounter.totalClicks,
+            requestTimeStamp: clickCounter.requestTimeStamp
+        }
+
+
+        res.status(200).json(returnedUrlItem)
       } catch (err) {
           console.log(err)
         res.status(500).json({err: err})

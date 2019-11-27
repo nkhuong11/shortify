@@ -2,7 +2,7 @@
 .generate-url-component {
     display: flex;
     justify-content: center;
-    margin: 1rem;
+    margin: 1.8rem;
     width: 100%;
 }
 
@@ -11,7 +11,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 70%
+    width: 70%;
 }
 
 .url-input-container input{
@@ -21,33 +21,41 @@
 
 .url-input {
     width: 80%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0.1rem solid #5e5e5e;
 }
 
 .uniqid-input {
     width: 20%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0.1rem solid #5e5e5e;
 }
 
 .generate-buton{
-    background-color: #caeaca;
+    background-color: #166D64;
+    border: 0.1rem solid #1B2A3A;
     cursor: pointer;
-    height: 3rem;
+    height: 2.9rem;
     font-size: large;
     width: 15%;
     margin-left: 1rem;
-
+    color: #dadada;
 }
 
 .generate-buton:hover {
-    background-color: #fafafa;
+    background-color: #278d83;
+    border: 0.1rem solid #a9d8d3;
 }
 
 .url-result-container {
     width: 70%;
     display: flex;
-    margin: 0.5rem 5rem;
+    margin: 0.5rem 5rem 2rem 0.5rem;
     text-align: center;
     vertical-align: middle;
-    box-shadow: 0 5px 10px rgba(59,64,69,0.1);
+    box-shadow: 0 2px 8px rgba(59,64,69,0.1);
 }
 
 .shortened-url {
@@ -55,7 +63,7 @@
     height: 2rem;
     width: 80%;
     border-radius: 0.3rem;
-    font-weight: 500;
+    font-weight: 600;
     background-color: #eaeaea;
     justify-content: center;
     text-align: center;
@@ -64,6 +72,7 @@
     line-height: 2rem;
     outline: none;
     padding: 0;
+    color: #030303
 }
 
 .copy-url-button {
@@ -72,12 +81,14 @@
     border-radius: 0;
     font-size: 1rem;
     font-weight: 500;
+    background-color: #1B2A3A;
+    color: #dadada;
 }
 
 .copy-url-button:hover {
-    background-color: green;
+    background-color: #2d3c4b;
 }
 
 .copy-url-button:active {
-    background-color: red;
+    background-color: #4b5f74;
 }

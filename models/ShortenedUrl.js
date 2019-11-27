@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const ClickCounter = require('./ClickCounter');
+
 const ShortenedUrlSchema = new Schema({
     uniqueId: {
         type: String,
@@ -33,6 +35,7 @@ const ShortenedUrlSchema = new Schema({
         default: Date.now
     }
 });
+
 
 const ShortenedUrl = mongoose.model('ShortenedUrl', ShortenedUrlSchema)
 module.exports = ShortenedUrl;

@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 
 const ShortenedUrl = require('../models/ShortenedUrl');
+const ClickCounter = require('../models/ClickCounter');
+const User = require('../models/User');
 
 
 async function getPublicUlrsMiddleware(req, res) {
@@ -27,7 +29,6 @@ async function getPublicUlrsMiddleware(req, res) {
             res.status(200).json(recentUrlsResult);
         }
     } catch(err){
-        console.log(err)
         res.status(500).json({err: err})
     }
 }
@@ -60,14 +61,35 @@ async function getPrivateUlrsMiddleware(req, res) {
                 })
                 res.status(200).json(privateUrlsResult);
             }
+        } else {
+            res.status(401).json({error: 'Unauthorized'});
         }
     } catch(err){
-        console.log(err)
+        res.status(500).json({err: err})
+    }
+}
+
+async function deleteUlrMiddleware(req, res, next) {
+    try {
+        if (req.token) {
+            const ownerId = jwt.verify(req.token, keys.JWT_SECRET)._id; //
+            const {url_id} = req.body;
+            const deletedUrl = await ShortenedUrl.findOneAndDelete({ _id: url_id, ownerId: ownerId});
+            if(deletedUrl) {
+                await ClickCounter.findOneAndDelete({_id: deletedUrl.clickCounterId});
+                await User.findOneAndUpdate({_id: deletedUrl.ownerId}, {$pull: {shortenedUrls: deletedUrl._id}});
+                res.status(200).json({message: "URL deleted successfully"});
+            }
+        }
+        next();
+    } catch(err){
         res.status(500).json({err: err})
     }
 }
 
 module.exports = {
     getPublicUlrsMiddleware,
-    getPrivateUlrsMiddleware
+    getPrivateUlrsMiddleware,
+    deleteUlrMiddleware
 }
+

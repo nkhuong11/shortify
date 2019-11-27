@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-// import errorReducer from './errorReducer';
+
 import authReducer from './authReducer';
-// import getDataReducer from './getDataReducer';
+import urlItemsReducer from './urlItemsReducer';
+
 
 export default combineReducers({
-    // errors: errorReducer,
     auth: authReducer,
-    // data: getDataReducer, 
+    urlItems: urlItemsReducer,
 });

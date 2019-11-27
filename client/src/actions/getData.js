@@ -1,24 +1,16 @@
-import axios from 'axios';
-import { GET_ALL_DATA, GET_ERRORS } from './types';
+import { SET_PUBLIC_URLS, SET_PRIVATE_URLS } from './types';
 
-export const getAllUsers = () => dispatch => {
-    console.log('get all user');
-    axios.get('/api/get/users')
-        .then(res => {
-            const {data} = res;
-            dispatch(setData(data));
-        })
-        .catch(err => {
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            });
-        });
+
+export const setPublicUrls = urlList => {
+    return {
+        type: SET_PUBLIC_URLS,
+        payload: urlList
+    }
 }
 
-export const setData = data => {
+export const setPrivateUrls = urlList => {
     return {
-        type: GET_ALL_DATA,
-        payload: data
+        type: SET_PRIVATE_URLS,
+        payload: urlList
     }
 }

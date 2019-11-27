@@ -25,7 +25,7 @@ const UserSchema = new Schema({
 
     avatar: {
         type: String,
-        default: 'http://www.gravatar.com/avatar/75d23af433e0cea4c0e45a56dba18b30?s=400&r=pg&d=mm'
+        default: 'https://www.gravatar.com/avatar/d1a4927d65d5228d8f3c5d11cc040afe?s=200&d=identicon'
     },
 
     shortenedUrls: [{type: Schema.Types.ObjectId, ref: 'ShortenedUrl'}],

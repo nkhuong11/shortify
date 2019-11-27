@@ -5,8 +5,9 @@
     top: 0;
     width: 100%;
     padding: 0.7rem 0;
-    background-image: linear-gradient(-90deg, #005249, #0f8a79);
+    background-image: linear-gradient(-90deg, #25323A, #0f8a79);
     z-index: 1;
+    box-shadow: 0 3px 8px rgba(59,64,69,0.1);
 }
 
 .my-custom-navbar ul {
@@ -31,7 +32,7 @@
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
-    border: 2px solid #0fd945;
+    border: 2px solid #AEE4DC;
 }
 
 .navbar-right-item {

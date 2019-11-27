@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
+import { setPrivateUrls, setPublicUrls } from '../actions/getData';
+
 
 import "./css/GenerateURLComponent.css";
 
-export default function GenerateURLComponent(props) {
+function GenerateURLComponent(props) {
     const [originUrl, setOriginUrl] = useState("");
     const [uniqId, setUniqId] = useState("");
     const [showResult, setShowResult] = useState(false);
@@ -22,26 +26,24 @@ export default function GenerateURLComponent(props) {
     
     function handleSubmit(e) {
         e.preventDefault();
-        
+
         if(checkValidUrl(originUrl) && checkValidCustomId(uniqId)) {
-            axios({
-                method: 'post',
-                url: '/api/services/shortener',
-                data: {
-                    originUrl: originUrl,
-                    uniqId: uniqId
-                }})
+            axios.post('/api/services/shortener', { originUrl: originUrl,uniqId: uniqId})
                 .then(res => {
                     if (res.status === 409) {
-                        console.log(res.data)
+                        alert(res.data.error)
                         
                     } else if (res.status === 200) {
-                        console.log(res.data)
-                        setShortedUrl(res.data.url);
+                        setShortedUrl(res.data.shortedUrl);
                         setShowResult(true);
+                        alert("Created URL successfully");
+                        // UPDATE UI STATE (ITEM LIST);
+                        if(props.auth.isAuthenticated) {
+                            props.setPrivateUrls([...props.urlItems.privateUrls, res.data])
+                        } else {
+                            props.setPublicUrls([...props.urlItems.publicUrls, res.data])
+                        }
                     }
-                    
-                
                 })
                 .catch(error => console.log(error));
         } else {
@@ -96,3 +98,23 @@ export default function GenerateURLComponent(props) {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+      auth: state.auth,
+      urlItems: state.urlItems
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setPrivateUrls: urls => {
+            dispatch(setPrivateUrls(urls));
+        },
+        setPublicUrls: urls => {
+            dispatch(setPublicUrls(urls));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenerateURLComponent);

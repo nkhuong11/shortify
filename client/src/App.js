@@ -36,7 +36,7 @@ export default class App extends Component {
         store.dispatch(setLoggedOut());
         window.location.href = '/login'
       } else {
-        setAuthToken(localStorage.jwtToken); // SET reuqest header
+        setAuthToken(localStorage.jwtToken); // SET request header
         store.dispatch(setLoggedIn(decoded));
       }
     }
