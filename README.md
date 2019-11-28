@@ -1,4 +1,4 @@
-# Shortìy
+# Shortify
 
 ## Application description:
 - Shortened URL Application. 
