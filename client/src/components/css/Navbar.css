@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     top: 0;
     width: 100%;
-    padding: 0.7rem 0;
+    height: 3rem;
     background-image: linear-gradient(-90deg, #25323A, #0f8a79);
     z-index: 1;
     box-shadow: 0 3px 8px rgba(59,64,69,0.1);
@@ -15,16 +16,21 @@
 }
 
 .navbar-logo {
-    color: #92c7d4;
-    font-weight: 600;
+    color: rgb(75, 204, 191);
+    font-weight: 500;
     font-size: 2rem;
     padding: 0px 5rem;
     font-style: italic;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar-right-item-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     padding: 0px 5rem;
 }
 
@@ -37,10 +43,24 @@
 
 .navbar-right-item {
     margin: 0 0.7rem;
+    height: 100%;
+}
+
+.navbar-label {
+    display: flex;
+    color: #dadada;
+    padding: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-label:hover {
+   border-bottom: 0.2rem solid #83dace;
 }
 
 .navbar-label:active {
-    color: red;
+    border-bottom: 0.2rem solid #0f8a79;
 }
 
 .modal-menu {

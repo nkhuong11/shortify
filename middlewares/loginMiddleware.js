@@ -36,8 +36,8 @@ module.exports = async function loginMiddleware(req, res) {
                     });
                 }
                 else {
-                    errors.password = 'Authentication failed. Wrong password';
-                    return res.status(401).json(errors);
+                    error = 'Authentication failed. Wrong password';
+                    return res.status(401).json(error);
                 }
             });
         }

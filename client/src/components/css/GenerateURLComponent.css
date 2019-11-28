@@ -12,6 +12,8 @@
     justify-content: center;
     align-items: center;
     width: 70%;
+    box-shadow: 0 0.2rem 0.3rem rgba(59,64,69,0.25);
+    border-radius: 0.4rem;
 }
 
 .url-input-container input{
@@ -26,6 +28,11 @@
     border-right: 0.1rem solid #5e5e5e;
 }
 
+.url-input:focus {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .uniqid-input {
     width: 20%;
     border-top-left-radius: 0;
@@ -33,15 +40,21 @@
     border-left: 0.1rem solid #5e5e5e;
 }
 
+.uniqid-input:focus {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 .generate-buton{
     background-color: #166D64;
-    border: 0.1rem solid #1B2A3A;
+    border: 0.1rem solid transparent;
     cursor: pointer;
     height: 2.9rem;
     font-size: large;
+    font-weight: 600;
     width: 15%;
     margin-left: 1rem;
     color: #dadada;
+    box-shadow: 0 0.2rem 0.3rem rgba(59,64,69,0.25);
 }
 
 .generate-buton:hover {
@@ -55,7 +68,8 @@
     margin: 0.5rem 5rem 2rem 0.5rem;
     text-align: center;
     vertical-align: middle;
-    box-shadow: 0 2px 8px rgba(59,64,69,0.1);
+    box-shadow: 0 0.2rem 0.3rem rgba(59,64,69,0.25);
+    border-radius: 0.4rem;
 }
 
 .shortened-url {
@@ -72,17 +86,22 @@
     line-height: 2rem;
     outline: none;
     padding: 0;
-    color: #030303
+    color: #030303;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .copy-url-button {
     width: 20%;
     height: 2rem;
-    border-radius: 0;
+    border-radius: 0.4rem;
     font-size: 1rem;
     font-weight: 500;
     background-color: #1B2A3A;
     color: #dadada;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: none;
 }
 
 .copy-url-button:hover {

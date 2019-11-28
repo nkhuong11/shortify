@@ -34,7 +34,7 @@ class Navbar extends Component {
                 this.props.setLoggedOut({});
                 this.props.history.push('/login');
             })
-            .catch(error => console.log(error)); 
+            .catch(error => alert(error)); 
     }
 
     renderMunuModal() {
@@ -71,10 +71,10 @@ class Navbar extends Component {
         const guestLinks = (
             <ul className="navbar-right-item-wrapper">
                 <div className="navbar-label">
-                    <Link className="navbar-right-item" to="/register">Sign Up</Link>
+                    <Link to="/register">SIGN UP</Link>
                 </div>
                 <div className="navbar-label">
-                    <Link className="navbar-right-item" to="/login">Sign In</Link>
+                    <Link to="/login">SIGN IN</Link>
                 </div>
             </ul>
         )
@@ -84,9 +84,7 @@ class Navbar extends Component {
                 <div className="navbar-logo">
                     <Link to="/">Shortify</Link>
                 </div>
-                <div className="navbar-right-item">
                     {this.props.auth.isAuthenticated ? authLinks : guestLinks}
-                </div>
             </nav>
         )
     }

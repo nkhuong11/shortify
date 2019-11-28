@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #5eaa91;
+    background-color: #98b8ad;
 }
 
 .tab-list {
@@ -18,20 +18,21 @@
     padding: 1rem 0.75rem;
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
-    background-color: #2D3E50;
-    color: #fff;
+    background-color: #3a3a3a;
+    color: #888888;
 }
   
 .tab-list-active {
-    background-color: #1b2a3a;
-    font-weight: 500;
+    background-color: #2a2a2a;
+    font-weight: 600;
+    color: #cccccc;
 }
 
 .tab-content {
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    background-color: #1b2a3a;
+    background-color: #2a2a2a;
     height: 32rem;
     overflow: hidden;
     padding: 2rem;

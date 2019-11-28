@@ -11,61 +11,68 @@ export default function RegisterPage(props) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        axios({
-            method: 'post',
-            url: '/api/user/register',
-            data: {
-                username: username,
-                email: email,
-                password: password
-            }})
-            .then(res => {
-                if (res.status === 200) {
-                    alert('Reister Successful');
-                    props.history.push('/login');
-                }
-            })
-            .catch(error => console.log(error));
+        if(password.length < 8) {
+            alert('The Password must be at least 8 characters long');
+            setPassword("");
+        } else {
+            axios({
+                method: 'post',
+                url: '/api/user/register',
+                data: {
+                    username: username,
+                    email: email,
+                    password: password
+                }})
+                .then(res => {
+                    if (res.status === 200) {
+                        alert('Reister Successful');
+                        props.history.push('/login');
+                    }
+                })
+                .catch(error => console.log(error));
+        }
     }
 
     return (
         <div className="auth-container">
-            <form onSubmit={handleSubmit} className="input-group">
-                <div className="form-group">
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        autoFocus
-                        name="username"
-                        onChange={ e => setUsername(e.target.value)}
-                        value={ username }/>
-                </div>
+            <div className="blur-panel">
+                <form onSubmit={handleSubmit} className="input-group">
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            autoFocus
+                            name="username"
+                            onChange={ e => setUsername(e.target.value)}
+                            value={ username }/>
+                    </div>
 
-                <div className="form-group">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        onChange={ e => setEmail(e.target.value)}
-                        value={ email }/>
-                </div>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            name="email"
+                            onChange={ e => setEmail(e.target.value)}
+                            value={ email }/>
+                    </div>
 
-                <div className="form-group">
-                    <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    onChange={ e => setPassword(e.target.value)}
-                    value={ password }
-                    />
-                </div>
-            
-                <div className="form-group">
-                    <button type="submit" className="auth-button">
-                        Register
-                    </button>
-                </div>
-            </form>
+                    <div className="form-group">
+                        <input
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        onChange={ e => setPassword(e.target.value)}
+                        value={ password }
+                        />
+                    </div>
+                
+                    <div className="form-group">
+                        <button type="submit" className="auth-button">
+                            REGISTER
+                        </button>
+                    </div>
+                </form>
+            </div> 
         </div>
     );
 }

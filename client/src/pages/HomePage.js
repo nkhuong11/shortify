@@ -18,7 +18,6 @@ class HomePage extends Component {
 
     async componentDidMount() {
         const recentUrlsRespone = await axios.get('/api/services/get/public-urls');
-        console.log(recentUrlsRespone);
         if (recentUrlsRespone.status === 200) {
             this.props.setPublicUrls(recentUrlsRespone.data);
         }
@@ -38,10 +37,10 @@ class HomePage extends Component {
                <div className="tab-wrapper">
                     <Tabs>
                         <div label="Recent URL" isHidden={false}>
-                            <UrlList urlList={this.props.urlItems.publicUrls}/>
+                            <UrlList urlList={this.props.urlItems.publicUrls} canDelete={false}/>
                         </div>
                         <div label="Your URL" isHidden={!this.props.auth.isAuthenticated}>
-                            <UrlList urlList={this.props.urlItems.privateUrls}/>
+                            <UrlList urlList={this.props.urlItems.privateUrls} canDelete={true}/>
                         </div>
                     </Tabs>
                </div>

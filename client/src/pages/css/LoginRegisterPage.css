@@ -10,24 +10,33 @@
     background-image: url("https://live.staticflickr.com/5512/9319373740_96e221a495_h.jpg");
     background-size: 100% 100%;
     overflow: hidden;
-    z-index: -5;
+}
+
+.blur-panel {
+    background-color: rgba(40, 70, 65, 0.7);
+    border: 0.1rem solid #2a8074;
+    margin-top: 5rem;
+    padding: 1.2rem 0;
+    border-radius: 0.4rem;
 }
 
 .form-group {
-    margin: 1.5rem;
+    margin: 1rem;
+    opacity:1;
 }
 
 .input-group {
-    margin-top: 5rem;
+    padding: 1rem;
 }
 
 .auth-button {
     margin-top: 1rem;
     width: 15rem;
-    background-color: #70eae6;
-    border: 0.1rem solid #8af7f3;
+    background-color: #178d7d;
+    border: 0.1rem solid #27a796;
 }
 
 .auth-button:hover {
-    background-color: #8af7f3;
+    background-color: #2a9e8f;
+    border: 0.1rem solid #3ead9f;
 }

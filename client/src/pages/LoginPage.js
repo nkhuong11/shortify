@@ -23,47 +23,51 @@ function LoginPage(props) {
               password: password
             }})
             .then(res => {
-                const { token } = res.data;
-                const decoded = jwt_decode(token);
-                localStorage.setItem('jwtToken', token);
-                localStorage.setItem('_id', decoded._id);
-                setAuthToken(token);
-                
-                props.setLoggedIn(decoded);
-                props.history.push('/');
+                if (res.status === 200) {
+                    const { token } = res.data;
+                    const decoded = jwt_decode(token);
+                    localStorage.setItem('jwtToken', token);
+                    localStorage.setItem('_id', decoded._id);
+                    setAuthToken(token);
+                    
+                    props.setLoggedIn(decoded);
+                    props.history.push('/');
+                }             
             })
-            .catch(error => console.log(error));
+            .catch(error => alert(error));
 
     }
 
     return (
         <div className="auth-container">
-            <form onSubmit={handleSubmit} className="input-group">
-                <div className="form-group">    
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        autoFocus
-                        name="email"
-                        onChange={ e => setEmail(e.target.value)}
-                        value={ email }/>
-                </div>
+            <div className="blur-panel">
+                <form onSubmit={handleSubmit} className="input-group">
+                    <div className="form-group">    
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            autoFocus
+                            name="email"
+                            onChange={ e => setEmail(e.target.value)}
+                            value={ email }/>
+                    </div>
 
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        onChange={ e => setPassword(e.target.value)}
-                        value={ password }/>
-                </div>
-            
-                <div className="form-group">
-                    <button type="submit" className="auth-button">
-                        Login
-                    </button>
-                </div>
-            </form>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            onChange={ e => setPassword(e.target.value)}
+                            value={ password }/>
+                    </div>
+                
+                    <div className="form-group">
+                        <button type="submit" className="auth-button">
+                            LOGIN
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

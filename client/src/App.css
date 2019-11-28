@@ -6,15 +6,16 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #5eaa91;
+  /* background-color: #5eaa91; */
+   background-color: #98b8ad;
 }
 
 
 input {
   height: 3rem;
-  width: 25rem;
+  width: 22rem;
   font-size: large;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   border: 0.1rem solid #9e9e9e;
   opacity: 0.75;
   color: #010101;
@@ -30,7 +31,7 @@ input:focus {
 }
 
 button {
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   border: none; 
   height: 3rem;
   font-size: large;

@@ -14,21 +14,29 @@ function GenerateURLComponent(props) {
     const [shortedUrl, setShortedUrl] = useState("");
     const urlResultRef = useRef(null);
 
-
-    function checkValidUrl(url) {
-        return url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    }
-
     //Only Accept ASCII characters
     function checkValidCustomId(id) {
         return id.match(/^[\x00-\xFF]*$/);
     }
+
+    function configInputUrl(url) {
+        if (url.match(/(http(s)?:\/\/)(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)) {
+            return url; //Link already filled with http(s) and www.
+        } else if (url.match(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)) {
+            return "http://" + url;
+        } else if(url.match(/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)) {
+            return "http://www." + url;
+        } else {
+            return false
+        }
+    }
     
     function handleSubmit(e) {
         e.preventDefault();
-
-        if(checkValidUrl(originUrl) && checkValidCustomId(uniqId)) {
-            axios.post('/api/services/shortener', { originUrl: originUrl,uniqId: uniqId})
+        const checkedOriginUrl = configInputUrl(originUrl);
+    
+        if(checkedOriginUrl && checkValidCustomId(uniqId)) {
+            axios.post('/api/services/shortener', { originUrl: checkedOriginUrl,uniqId: uniqId})
                 .then(res => {
                     if (res.status === 409) {
                         alert(res.data.error)

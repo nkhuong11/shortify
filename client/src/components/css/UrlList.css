@@ -6,35 +6,81 @@
     height: 100%;
 }
 
-
-
-
 .url-item-container {
     display: flex;
     flex-direction: row;
-    background: #dedede;
+    width: 100%;
+    background: #3e3e3e;
     margin: 0 0 0.5rem 0;
-    padding: 1rem 3rem;
     justify-content: space-between;
     text-align: left;
     transition: transform .2s;
+    border-top-left-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+    color: #dadada;
 }
 
 .url-item-container:hover {
     transform: scale(1.02);
+    box-shadow: 0rem 0rem 0.3rem rgba(124, 196, 171, 0.65);
   }
 
 .original-url {
-    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #aaaaaa;
+    width: 100%;
+    overflow: hidden;
 }
 
 .shorted-url {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    color: #dadada;
+    width: 100%;
+    overflow: hidden;
+}
+
+.shorted-url-anchor {
+    color: rgb(233, 133, 62);
+}
+
+.shorted-url-anchor:hover {
+    color: rgb(17, 212, 196);
+}
+
+.original-url-anchor {
+    color: #e29055;
+}
+
+.urls-container {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 2rem;
 }
 
 .click-counter-container {
     display: flex;
     flex-direction: row;
+    height: 5rem;
+    width: 37%;
+}
+
+.click-counter-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top-style: solid;
+    border-top-color: #9f9f9f;
+    padding: 0 1.5rem;
+    background-color: #383838;
+    width: 100%;
+}
+
+.click-counter-wrapper:hover {
+    border-top-color: #985EFF;
+    border-left-color: #985EFF;
 }
 
 .click-counter-item {
@@ -48,11 +94,46 @@
 }
 
 .clicks {
+    padding-top: 0.6rem;
     font-weight: 500;
     font-size: 1rem;
 }
 
-.delete-button {
-    background-color: red;
-    
+.custom-hours-container{
+    display: flex;
+    flex-direction: row;
+    text-align:center;
 }
+
+.custom-hours-input {
+    width: 2.5rem;
+    height: 1rem;
+    font-size: 0.9rem;
+    align-items: "center";
+    justify-content: "center";
+    border: 0;
+    border-radius: 0;
+    color: #dadada;
+    background-color: #1e1e1e;
+    text-align: center;
+    padding: 0.1rem;
+}
+.custom-hours-input:focus {
+    border: 0;
+    border-radius: 0;
+}
+
+.delete-button {
+    background-color: #AC033C;
+    border-radius: 0;
+    color: #dadada;
+    font-size: 1.8rem;
+    padding: 0 0.5rem;
+    height: 5rem;
+    width: 3%;
+}
+
+.delete-button:hover {
+    background-color: rgb(150, 0, 50);
+}
+

@@ -8,10 +8,10 @@ import { setPrivateUrls } from '../actions/getData';
 import './css/UrlList.css'
 
 function UrlList(props) {
-    function renderList(urlList) {
+    function renderList(urlList, canDelete) {
         return urlList.map(each => {
             return (
-                <UrlItem url={each} key={each._id} handleDeleteItem={handleDeleteItem}/>
+                <UrlItem url={each} key={each._id} handleDeleteItem={handleDeleteItem} canDelete={canDelete}/>
             )
         })
     }
@@ -36,7 +36,7 @@ function UrlList(props) {
 
     return (
         <div className="url-list-container">
-            {renderList(props.urlList)}
+            {renderList(props.urlList, props.canDelete)}
         </div>
     )
 }
