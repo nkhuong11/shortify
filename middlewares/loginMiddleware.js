@@ -9,7 +9,7 @@ module.exports = async function loginMiddleware(req, res) {
     user = await User.findOne({email: req.body.email})
 
     if(!user) {
-        return res.status(404).json({email: 'User not found'});
+        return res.status(404).send('User not found');
     } else {
         bcrypt.compare(req.body.password, user.password)
             .then(isMatch => {
@@ -36,8 +36,7 @@ module.exports = async function loginMiddleware(req, res) {
                     });
                 }
                 else {
-                    error = 'Authentication failed. Wrong password';
-                    return res.status(401).json(error);
+                    return res.status(401).send('Authentication failed. Wrong password');
                 }
             });
         }

@@ -27,9 +27,7 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         existUrl = await ShortenedUrl.findOne({uniqueId: uniqId});
 
         if(existUrl) {
-            return res.status(409).json({
-                error: 'This ID is already taken, please choose another one.'
-            })
+            return res.status(409).send('This ID is already taken, please choose another one.')
         }
     }
 
@@ -68,7 +66,7 @@ module.exports = async function shortenerUrlMiddleware(req, res) {
         res.status(200).json(returnedUrlItem)
       } catch (err) {
           console.log(err)
-        res.status(500).json({err: err})
+        res.status(500).send(err);
       }
 }
 

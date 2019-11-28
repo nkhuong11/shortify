@@ -39,21 +39,20 @@ function GenerateURLComponent(props) {
             axios.post('/api/services/shortener', { originUrl: checkedOriginUrl,uniqId: uniqId})
                 .then(res => {
                     if (res.status === 409) {
-                        alert(res.data.error)
-                        
+                        alert("Custome Id conflict. Please choose another one.")
                     } else if (res.status === 200) {
                         setShortedUrl(res.data.shortedUrl);
                         setShowResult(true);
                         alert("Created URL successfully");
                         // UPDATE UI STATE (ITEM LIST);
                         if(props.auth.isAuthenticated) {
-                            props.setPrivateUrls([...props.urlItems.privateUrls, res.data])
+                            props.setPrivateUrls([res.data, ...props.urlItems.privateUrls])
                         } else {
-                            props.setPublicUrls([...props.urlItems.publicUrls, res.data])
+                            props.setPublicUrls([res.data, ...props.urlItems.publicUrls])
                         }
                     }
                 })
-                .catch(error => console.log(error));
+                .catch(error => alert(error.response.data));
         } else {
             alert('Invalid URL/Custom ID. Please try again');
         }
