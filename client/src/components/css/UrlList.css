@@ -57,30 +57,40 @@
     width: 60%;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 0 2rem;
 }
 
 .click-counter-container {
     display: flex;
-    flex-direction: row;
-    height: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    height: 5.8rem;
     width: 37%;
+    border-top-style: solid;
+    border-top-color: #9f9f9f;
+    padding: 0 1.5rem;
+    background-color: #383838;
+}
+
+.click-counter-container {
+    border-top-color: #985EFF;
+    border-left-color: #985EFF;
 }
 
 .click-counter-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border-top-style: solid;
-    border-top-color: #9f9f9f;
-    padding: 0 1.5rem;
-    background-color: #383838;
     width: 100%;
 }
 
-.click-counter-wrapper:hover {
-    border-top-color: #985EFF;
-    border-left-color: #985EFF;
+.total-clicks-label {
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    margin-bottom: 0.3rem;
+    color: rgb(233, 133, 62);
 }
 
 .click-counter-item {
@@ -97,6 +107,7 @@
     padding-top: 0.6rem;
     font-weight: 500;
     font-size: 1rem;
+    color: #4BCCBF
 }
 
 .custom-hours-container{

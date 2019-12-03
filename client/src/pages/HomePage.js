@@ -36,10 +36,10 @@ class HomePage extends Component {
                <GenerateURLComponent/>
                <div className="tab-wrapper">
                     <Tabs>
-                        <div label="Recent URL" isHidden={false}>
+                        <div label="Recent URLs" isHidden={false}>
                             <UrlList urlList={this.props.urlItems.publicUrls} canDelete={false}/>
                         </div>
-                        <div label="Your URL" isHidden={!this.props.auth.isAuthenticated}>
+                        <div label="Your URLs" isHidden={!this.props.auth.isAuthenticated}>
                             <UrlList urlList={this.props.urlItems.privateUrls} canDelete={true}/>
                         </div>
                     </Tabs>

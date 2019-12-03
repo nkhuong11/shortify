@@ -14,7 +14,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import NavBar from './components/Navbar';
-// import axios from 'axios';
 import './App.css';
 
 import {setLoggedIn, setLoggedOut} from './actions/authentication';
@@ -26,7 +25,6 @@ export default class App extends Component {
     this.checkjwtToken();
     
   }
-
 
   checkjwtToken(){
     if(localStorage.jwtToken) {
@@ -41,7 +39,6 @@ export default class App extends Component {
       }
     }
   }
-  // axios.defaults.headers.common['x-csrf-token'] = 'MY SESSION SECRET'
 
   render() {
     return (

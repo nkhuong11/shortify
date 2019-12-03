@@ -1,5 +1,4 @@
 import { LOGGED_IN, LOGGED_OUT } from '../actions/types';
-// import isEmpty from '../services/is-empty';
 
 const initialState = {
     isAuthenticated: false,

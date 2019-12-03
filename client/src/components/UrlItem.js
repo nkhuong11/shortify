@@ -45,6 +45,7 @@ export default function UrlItem(props) {
                 </div>
             </div>
             <div className="click-counter-container">
+                <div className="total-clicks-label">Views tracking</div>
                 <div className="click-counter-wrapper">
                     <div className="click-counter-item">Total <span className="clicks">{totalClicks}</span></div>
                     <div className="click-counter-item">Last 24 hours <span className="clicks">{last24HoursClick}</span></div>

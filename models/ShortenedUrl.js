@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const ClickCounter = require('./ClickCounter');
-
 const ShortenedUrlSchema = new Schema({
     uniqueId: {
         type: String,
